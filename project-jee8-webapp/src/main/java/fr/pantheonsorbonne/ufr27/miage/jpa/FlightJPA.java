@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-public class Flight {
+public class FlightJPA {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +28,7 @@ public class Flight {
 	@XmlElement(name = "Seats")
 	@XmlTransient
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "flight")
-    protected List<Seat> nbPlacesRestantes;
+    protected List<SeatJPA> nbPlacesRestantes;
 
 	@XmlElement(name = "origine")
     protected String origine;
@@ -88,14 +88,14 @@ public class Flight {
 	/**
 	 * @return the nbPlacesRestantes
 	 */
-	public List<Seat> getNbPlacesRestantes() {
+	public List<SeatJPA> getNbPlacesRestantes() {
 		return nbPlacesRestantes;
 	}
 
 	/**
 	 * @param nbPlacesRestantes the nbPlacesRestantes to set
 	 */
-	public void setNbPlacesRestantes(List<Seat> nbPlacesRestantes) {
+	public void setNbPlacesRestantes(List<SeatJPA> nbPlacesRestantes) {
 		this.nbPlacesRestantes = nbPlacesRestantes;
 	}
 

@@ -9,13 +9,13 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 
 @Entity
-public class Seat {
+public class SeatJPA {
 	
 	@Id
 	@ManyToOne
 	@XmlElement(name = "identifiantVol")
 	@XmlInverseReference(mappedBy="nbPlacesRestantes")
-	protected Flight flight; 
+	protected FlightJPA flight; 
 	
 	@XmlElement(name = "price")
 	private Double price;
@@ -30,14 +30,14 @@ public class Seat {
 	/**
 	 * @return the flight
 	 */
-	public Flight getFlight() {
+	public FlightJPA getFlight() {
 		return flight;
 	}
 
 	/**
 	 * @param flight the flight to set
 	 */
-	public void setFlight(Flight flight) {
+	public void setFlight(FlightJPA flight) {
 		this.flight = flight;
 	}
 

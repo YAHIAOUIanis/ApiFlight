@@ -6,19 +6,22 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlElement;
 
 
-public class Ticket {
+public class TicketJPA {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@XmlElement(name = "id")
 	private int id;
 
-	@XmlElement(name = "identifiantVol")
-	protected String lastNamePassenger; 
+	@XmlElement(name = "passenger")
+	protected UserJPA passenger; 
 	
-	@XmlElement(name = "price")
-	private String firstNamePassenger;
+	@XmlElement(name = "flight")
+	private FlightJPA flight;
 	
-	@Id
+	@XmlElement(name = "seat")
+	private SeatJPA seat;
+
+	
 	@XmlElement(name = "price")
 	protected Double price; 
 		

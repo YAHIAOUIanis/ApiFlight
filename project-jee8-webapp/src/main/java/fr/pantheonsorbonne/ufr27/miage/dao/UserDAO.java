@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import fr.pantheonsorbonne.ufr27.miage.exception.NoSuchUserException;
 import fr.pantheonsorbonne.ufr27.miage.jpa.Customer;
-import fr.pantheonsorbonne.ufr27.miage.jpa.User;
+import fr.pantheonsorbonne.ufr27.miage.jpa.UserJPA;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.Address;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.ObjectFactory;
 
@@ -18,7 +18,7 @@ public class UserDAO {
 	EntityManager em;
 
 	public void addPassenger(String civility, String lastname, String firstname, int volId) {
-		User user = new User();
+		UserJPA user = new UserJPA();
 		user.setMembershipId(volId);
 		user.setFname(firstname);
 		user.setLname(lastname);
