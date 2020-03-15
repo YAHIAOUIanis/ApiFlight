@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,48 +27,10 @@ public class UserEndpoint {
 	@Inject
 	UserDAO dao;
 
-	@Inject
-	GymService service;
-
-	@Inject
-	PaymentValidationAckownledgerBean b1_;
-
-	@Inject
-	PaymentProcessorBean b2_;
-
-	@GET
-	@Path("/{userId}")
-	public User getUser(@PathParam("userId") int userId) {
-		try {
-			return dao.getUserFromId(userId);
-		} catch (NoSuchUserException e) {
-			throw new WebApplicationException(404);
-		}
-	}
-
-	@Consumes(value = { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@PUT
-	@Path("/{userId}")
-	public Response updateUserAddress(@PathParam("userId") int userId, Address address) {
-		try {
-			dao.updateUserAddress(userId, address);
-			return Response.ok().build();
-		} catch (NoSuchUserException e) {
-			throw new WebApplicationException(404);
-		}
-	}
-
-	@DELETE
-	@Path("/{userId}")
-	public Response deleteMemberShip(@PathParam("userId") int userId) throws UserHasDebtException {
-		try {
-			service.cancelMemberShip(userId);
-			return Response.ok().build();
-		} catch (
-
-		NoSuchUserException e) {
-			throw new WebApplicationException("no such user", 404);
-		}
+	@POST
+	@Path("/{volId}{firstname}{lastname}{civility}")
+	public void getUser(@PathParam("firstname") String firstname, @PathParam("lastname") String lastname, @PathParam("volId") int volId, @PathParam("civility") String civility) {
+		dao.addPassenger(civility,lastname,firstname,volId);
 	}
 
 }

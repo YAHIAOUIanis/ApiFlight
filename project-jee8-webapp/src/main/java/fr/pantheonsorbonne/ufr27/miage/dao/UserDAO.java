@@ -7,9 +7,9 @@ import javax.persistence.EntityManager;
 
 import fr.pantheonsorbonne.ufr27.miage.exception.NoSuchUserException;
 import fr.pantheonsorbonne.ufr27.miage.jpa.Customer;
+import fr.pantheonsorbonne.ufr27.miage.jpa.User;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.Address;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.ObjectFactory;
-import fr.pantheonsorbonne.ufr27.miage.model.jaxb.User;
 
 @ManagedBean
 public class UserDAO {
@@ -17,35 +17,15 @@ public class UserDAO {
 	@Inject
 	EntityManager em;
 
-	public User getUserFromId(int id) throws NoSuchUserException {
-
-		Customer customer = em.find(Customer.class, id);
-		if(customer==null) {
-			throw new NoSuchUserException();
-		}
-		User user = new ObjectFactory().createUser();
-		user.setFname(customer.getLname());
-		user.setLname(customer.getLname());
-		user.setMembershipId(customer.getId());
-		return user;
-
-	}
-
-	public void updateUserAddress(int userId, Address address) throws NoSuchUserException {
+	public void addPassenger(String civility, String lastname, String firstname, int volId) {
+		User user = new User();
+		user.setMembershipId(volId);
+		user.setFname(firstname);
+		user.setLname(lastname);
+		user.setCivility(civility);
+		
 		em.getTransaction().begin();
-		Customer customer = em.find(Customer.class, userId);
-		if(customer==null) {
-			throw new NoSuchUserException();
-		}
-		fr.pantheonsorbonne.ufr27.miage.jpa.Address customerAddress = customer.getAddress();
-		customerAddress.setCountry(address.getCountry());
-		customerAddress.setStreeNumber(address.getStreetNumber());
-		customerAddress.setStreetName(address.getStreetName());
-		customerAddress.setZipCode(address.getZipCode());
-
-		em.merge(address);
+		em.persist(user);
 		em.getTransaction().commit();
-
 	}
-
 }
