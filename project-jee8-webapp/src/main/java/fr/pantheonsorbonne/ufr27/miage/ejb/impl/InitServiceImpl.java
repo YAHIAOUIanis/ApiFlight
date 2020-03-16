@@ -22,6 +22,7 @@ import fr.pantheonsorbonne.ufr27.miage.exception.UserHasDebtException;
 import fr.pantheonsorbonne.ufr27.miage.jpa.Card;
 import fr.pantheonsorbonne.ufr27.miage.jpa.Contract;
 import fr.pantheonsorbonne.ufr27.miage.jpa.Customer;
+import fr.pantheonsorbonne.ufr27.miage.jpa.FlightJPA;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.Flight;
 
 @ManagedBean
@@ -36,9 +37,9 @@ public class InitServiceImpl implements InitService {
 	
 	public void initFlights() {
 		//FIRST FLIGHT
-		Flight flight = new Flight();
+		FlightJPA flight = new FlightJPA();
 		//flight.setDateDepart(null);
-		flight.setNbPlacesRestantes(12);
+	//	flight.setNbPlacesRestantes(12);
 	//	flight.setIdentifiantCompanie('AF');
 		//flight.setIdentifiantVol('623');
 		//flight.setDestination('Paris');

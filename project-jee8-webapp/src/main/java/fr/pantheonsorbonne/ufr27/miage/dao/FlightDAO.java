@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import fr.pantheonsorbonne.ufr27.miage.ejb.InitService;
 import fr.pantheonsorbonne.ufr27.miage.exception.NoSuchUserException;
 import fr.pantheonsorbonne.ufr27.miage.jpa.Customer;
+import fr.pantheonsorbonne.ufr27.miage.jpa.FlightJPA;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.Address;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.ObjectFactory;
 import fr.pantheonsorbonne.ufr27.miage.model.jaxb.User;
@@ -23,25 +24,22 @@ public class FlightDAO {
 	EntityManager em;
 
 
-	public List<Flight> getFlights(Date dateDepart, String  iata, Date heureDepart) throws NoSuchUserException {
+	public List<FlightJPA> getFlights(Date dateDepart, String  iata, Date heureDepart) {
 
-		List<Flight> customer = em.createQuery("select a from Flight a "
+		List<FlightJPA> customer = em.createQuery("select a from FlightJPA a "
                 + "where dateDepart = :dateDepart "
                 + "and iata = :iata "
-                + "and heureDepart = :heureDepart", Flight.class)
+                + "and heureDepart = :heureDepart", FlightJPA.class)
                 .setParameter("dateDepart", dateDepart)
                 .setParameter("iata", iata)
                 .setParameter("heureDepart", heureDepart)
                 .getResultList();
-		if(customer==null) {
-			throw new NoSuchUserException();
-		}
 		
 		return customer;
 
 	}
 	
-	public void addFlight(Flight flight) {
+	public void addFlight(FlightJPA flight) {
 			em.getTransaction().begin();
 			em.persist(flight);
 			em.getTransaction().commit();
